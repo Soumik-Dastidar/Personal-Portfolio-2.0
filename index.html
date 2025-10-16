@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soumik Dastidar | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* --- Variables for consistent styling --- */
+        :root {
+            --color-background-dark: #0f172a; 
+            --color-card-dark: #192338;      
+            --color-primary-blue: #007bff;   
+            --color-secondary-teal: #00c896;  
+            --color-text-light: #e2e8f0;      
+            --color-text-subtle: #94a3b8;     
+            --color-border-subtle: #2d3851;   
+            --font-heading: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* --- Global Reset and Body Styling --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-background-dark);
+            color: var(--color-text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        main {
+            padding-top: 60px; 
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+
+        section {
+            padding: 60px 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--color-text-light);
+        }
+
+        a {
+            color: var(--color-secondary-teal);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #4df0c7; 
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes rotate360 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .certifications-card:hover .cert-icon-rotate {
+            animation: rotate360 2s linear infinite;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 200, 150, 0.2); 
+        }
+
+        /* --- Utility Classes --- */
+        .text-center {
+            text-align: center !important;
+        }
+
+        .section-title {
+            color: var(--color-secondary-teal);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .section-subtitle {
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        .section-subtitle::first-letter {
+            color: var(--color-secondary-teal);
+            font-weight: 900;
+        }
+
+        /* --- Hero Section --- */
+        .hero-content h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+        .hero-content h1::first-line {
+            font-weight: 900;
+        }
+
+        .hero-content .description {
+             color: var(--color-text-subtle);
+             margin-bottom: 40px;
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background-color: var(--color-background-dark);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--color-text-light);
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar nav ul li {
+            margin-left: 25px;
+        }
+
+        .navbar nav ul li a {
+            color: var(--color-text-subtle); 
+            font-size: 0.95em;
+            font-weight: 500;
+            padding: 5px 0;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover,
+        .navbar nav ul li a.active {
+            border-bottom: 2px solid var(--color-secondary-teal);
+            color: var(--color-text-light);
+        }
+
+        /* --- Hero Section Layout --- */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 80vh;
+            padding-left: 40px; 
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content .role {
+            font-size: 1.2em;
+            color: var(--color-secondary-teal);
+            margin-bottom: 15px;
+        }
+
+        .hero-content .quote {
+            font-size: 1.5em;
+            color: var(--color-secondary-teal);
+            margin: 20px 0;
+            font-style: italic;
+            border-left: 4px solid var(--color-secondary-teal);
+            padding-left: 10px;
+        }
+
+        .hero-image-placeholder {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,200,150,0.3) 0%, rgba(0,200,150,0.1) 40%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            position: relative;
+            transform: scale(1.1);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--color-secondary-teal);
+            color: var(--color-background-dark);
+            border: 2px solid var(--color-secondary-teal);
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--color-secondary-teal);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-secondary-teal);
+            border: 2px solid var(--color-secondary-teal);
+        }
+        .btn-secondary:hover {
+            background-color: var(--color-secondary-teal);
+            color: var(--color-background-dark);
+        }
+
+        .social-links a {
+            font-size: 1.5em;
+            margin-right: 20px;
+            color: var(--color-text-subtle);
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--color-secondary-teal);
+        }
+
+        /* --- About Section --- */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: stretch; 
+        }
+
+        /* --- Card Styles --- */
+        .about-card, .professional-experience-card, .column-card, .certifications-card, .contact-card, .edu-card, .project-card, .blog-card {
+            background-color: var(--color-card-dark);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--color-border-subtle);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-card h2, .professional-experience-card h2, .column-card h3 {
+            color: var(--color-secondary-teal);
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+        }
+
+        .about-card h2 i, .professional-experience-card h2 i, .column-card h3 i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        .about-card p {
+            color: var(--color-text-subtle);
+            margin-bottom: 10px;
+        }
+        
+        .professional-experience-card .edu-details p {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+
+        .professional-experience-card .email-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--color-text-subtle);
+        }
+        .professional-experience-card .email-line i {
+            color: var(--color-secondary-teal);
+        }
+        .professional-experience-card .email-line a {
+             color: var(--color-text-subtle);
+             transition: color 0.3s ease;
+        }
+        .professional-experience-card .email-line a:hover {
+            color: var(--color-secondary-teal);
+        }
+
+
+        /* --- Education Section --- */
+        #education .section-subtitle {
+             margin-bottom: 50px;
+        }
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .edu-card {
+            padding: 25px;
+        }
+        .edu-card h3 {
+            font-size: 1.25em;
+            margin-bottom: 10px;
+        }
+        .edu-card p, .edu-card ul li {
+            font-size: 0.95em;
+            line-height: 1.7;
+            color: var(--color-text-subtle);
+        }
+        .edu-card .course {
+            font-weight: 600;
+            color: var(--color-text-light);
+            margin-bottom: 5px;
+        }
+        .edu-card .gpa {
+            margin-top: 5px;
+            font-style: italic;
+        }
+        .edu-card ul {
+            padding-left: 20px;
+            margin-top: 15px;
+        }
+        .edu-card ul li {
+            margin-bottom: 8px;
+        }
+
+        /* --- Certifications Section --- */
+        .certifications-card {
+            padding-bottom: 30px;
+        }
+        .certifications-card h2 {
+            margin-bottom: 20px;
+            color: var(--color-secondary-teal);
+        }
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .cert-item {
+            padding: 15px;
+            background-color: #112a43;
+            border-radius: 6px;
+            border-left: 3px solid var(--color-secondary-teal);
+        }
+        .cert-item strong {
+            display: block;
+            color: var(--color-text-light); 
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+        .cert-item span {
+            color: var(--color-text-subtle); 
+            font-size: 0.9em;
+        }
+
+        /* --- Activities, Volunteer, Skills, Awards --- */
+        .side-by-side-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: stretch;
+        }
+        .column-card {
+            padding: 30px;
+        }
+        .column-card ul, .column-card p {
+            color: var(--color-text-subtle);
+            padding-left: 20px;
+            list-style: disc;
+            font-size: 0.95em;
+        }
+        .activity-item {
+            margin-bottom: 25px;
+        }
+        .activity-item:last-child {
+            margin-bottom: 0;
+        }
+        .activity-item h4 {
+            margin-bottom: 5px;
+        }
+        .activity-item .meta {
+            margin-bottom: 10px;
+            padding-left: 0;
+            font-size: 0.9em;
+        }
+        
+        .skill-group-aligned {
+            margin-bottom: 25px;
+        }
+        .skill-group-aligned:last-child {
+            margin-bottom: 0;
+        }
+        .skill-group-aligned h4 {
+            margin-bottom: 15px;
+        }
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0;
+            list-style: none;
+        }
+        .skills-list span {
+            background-color: #112a43;
+            color: var(--color-text-light);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: default;
+        }
+        .skills-list span:hover {
+            background-color: var(--color-secondary-teal);
+            color: var(--color-background-dark);
+        }
+
+        /* --- Awards Section --- */
+        .award-item {
+             margin-bottom: 25px;
+        }
+        .award-item:last-child {
+            margin-bottom: 0;
+        }
+        .award-item h4 {
+            margin-bottom: 15px;
+        }
+        .award-item ul {
+            padding-left: 0;
+            list-style: none; 
+        }
+        .award-item ul li {
+            background-color: #112a43;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            color: var(--color-text-subtle);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .award-item ul li:hover {
+            background-color: #263b5e; 
+            transform: translateX(5px);
+        }
+        .award-item ul li strong {
+            color: var(--color-secondary-teal);
+        }
+
+        /* --- Projects Section --- */
+        .projects-grid.two-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: stretch;
+        }
+        .project-card .project-content {
+            flex-grow: 1;
+        }
+        .project-card .project-tech-stack {
+            color: var(--color-secondary-teal);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .project-card ul {
+            list-style-position: inside;
+        }
+        
+        .project-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .project-links a {
+            font-size: 1.5em;
+            color: var(--color-text-subtle);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .project-links a:hover {
+            color: var(--color-secondary-teal);
+            transform: scale(1.15);
+        }
+
+        .project-links .tech-tag {
+            background-color: #112a43;
+            color: var(--color-text-light);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+
+        /* --- Blog Section --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+        .blog-card {
+            padding: 25px;
+        }
+        /* FIX 4: Blog link alignment */
+        .blog-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .blog-content h3 {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .read-article-link {
+            margin-top: auto;
+            align-self: flex-start;
+        }
+
+        /* --- Feedback Section --- */
+        #feedback {
+            text-align: center;
+        }
+        #feedback .section-subtitle {
+             margin-bottom: 20px;
+        }
+        #feedback .contact-card {
+             flex-direction: column;
+             align-items: center;
+             max-width: 400px;
+             margin: 0 auto;
+        }
+        #feedback .contact-slogan {
+             margin-bottom: 20px;
+        }
+        
+        /* --- Contact Section --- */
+        #contact {
+            text-align: center;
+        }
+        #contact .contact-slogan {
+             margin-bottom: 40px;
+        }
+        /* FIX 3: Contact card alignment */
+        .contact-card {
+            display: inline-flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        .contact-section .contact-details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        .contact-card h2 {
+            color: var(--color-text-light);
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .info-item i {
+            color: var(--color-secondary-teal);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .info-item .label, .info-item span, .info-item a {
+            display: block;
+        }
+        .info-item .label {
+            color: var(--color-text-light);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .info-item span, .info-item a {
+            color: var(--color-text-subtle);
+            font-size: 0.9em;
+        }
+        .socials-row .social-icons-compact a {
+            display: inline-block;
+            font-size: 1.2em;
+            margin-right: 15px;
+            color: var(--color-text-subtle);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--color-border-subtle);
+            color: var(--color-text-subtle);
+            font-size: 0.9em;
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 992px) {
+            .about-section, .side-by-side-grid, .projects-grid.two-cols {
+                grid-template-columns: 1fr;
+            }
+            .projects-grid.two-cols {
+                max-width: 100%;
+            }
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-section .contact-details-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar nav ul {
+                display: none; 
+            }
+            .navbar {
+                justify-content: center;
+            }
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-image-placeholder {
+                display: none;
+            }
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">Soumik Dastidar</div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li> 
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section fade-in">
+            <div class="hero-content">
+                <h1>Hi - I'm Soumik!</h1>
+                <p class="role">Competitive Programmer • PTE Instructor</p>
+                <blockquote class="quote">“Unveiling “Hello World” to Transformative Possibilities.”</blockquote>
+                <p class="description">Passionate computer science enthusiast committed to cultivating expertise in cutting-edge technologies and making a meaningful impact in the tech industry.</p>
+
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">
+                        Reach Out to Me <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1cVTJ41VuFvVMdbRw2PoRYHycbFrrLZ7c?usp=sharing" class="btn btn-secondary" target="_blank">Download Resume</a> 
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/Soumik-Dastidar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/soumik-dastidar/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.facebook.com/SoumikSoumya/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://hashnode.com/@soumik-dastidar" target="_blank" aria-label="Hashnode Blog"><i class="fas fa-blog"></i></a>
+                    <a href="mailto:soumikdastider@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="hero-image-placeholder"></div>
+        </section>
+
+        <section id="about" class="about-section fade-in">
+            <div class="about-card card-hover">
+                <h2><i class="fas fa-user-circle"></i> Who am I?</h2>
+                <p>I'm Soumik Dastidar, a sophomore pursuing Computer Science and Engineering. Committed to cultivating expertise in cutting-edge technologies, I aspire to contribute to the dynamic landscape of the tech industry. With a keen eye on the future, my goal is to make a meaningful impact through dedication, continuous learning, and a drive for excellence.</p>
+                <p>Outside of tech, I enjoy tea, cricket, and football adventures—balancing digital curiosities with real-world passions.</p>
+                <p>Feel free to connect with me!</p>
+            </div>
+
+            <div class="professional-experience-card card-hover">
+                <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
+                <div class="edu-details">
+                    <h3>Faculty Member – PTE</h3>
+                    <p>Yes Academy, a Sister Concern of YES Group | Sylhet, Bangladesh</p>
+                    <p>Guiding students towards their success in Pearson Test of English.</p>
+                    <p class="gpa">October 2025 – Present</p>
+                    <p class="email-line">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:soumik@yesacademybd.com">soumik@yesacademybd.com</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="education-details-section fade-in">
+            <h2 class="section-title text-center">Academic Background</h2>
+            <h2 class="section-subtitle text-center">My Education & Certificates</h2>
+            
+            <div class="education-grid">
+                <div class="edu-card card-hover">
+                    <h3>Leading University</h3>
+                    <p class="course">Bachelor of Science – Computer Science and Engineering</p>
+                    <p class="date">July 2024 – Present</p>
+                    <p class="gpa">CGPA: 3.92 / 4.00</p>
+                    <ul>
+                        <li>Studying core computer science fundamentals with a focus on data structures and algorithms.</li>
+                        <li>Achievements: Placed in the top 10% in the Intra-University on-site contest.</li>
+                    </ul>
+                </div>
+                <div class="edu-card card-hover">
+                    <h3>Dhaka College</h3>
+                    <p class="course">Higher Secondary Certificate (HSC), Science</p>
+                    <p class="date">2022 – 2023</p>
+                    <p class="gpa">GPA: 5.00 / 5.00</p>
+                    <ul>
+                        <li>Active member of the Creative Panel in the Dhaka College Cultural Club (DCCC).</li>
+                        <li>Member of the Dhaka College Science Club (DCSC).</li>
+                    </ul>
+                </div>
+                <div class="edu-card card-hover">
+                    <h3>The Buds Residential Model School and College</h3>
+                    <p class="course">Secondary School Certificate (SSC), Science</p>
+                    <p class="date">2019 – 2021</p>
+                    <p class="gpa">GPA: 5.00 / 5.00</p>
+                    <ul>
+                        <li>Ex-emerging debater at the school’s debating club.</li>
+                        <li>Member of the science club, fostering early scientific curiosity.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="certifications" class="certifications-card card-hover">
+                <h2><i class="fas fa-certificate cert-icon-rotate"></i> Licenses & Certifications</h2>
+                <div class="cert-grid">
+                    <div class="cert-item">
+                        <strong>Google Certified Fundamentals of Digital Marketing</strong>
+                        <span class="cert-meta">Google (Dec 2021) – Credential ID: 4XGXEH3G</span>
+                    </div>
+                    <div class="cert-item">
+                        <strong>COVID-19: Operational Planning Guidelines & Partners Platform</strong>
+                        <span class="cert-meta">World Health Organization (Apr 2020)</span>
+                    </div>
+                    <div class="cert-item">
+                        <strong>Responsive Web Design & CSS Certification</strong>
+                        <span class="cert-meta">SoloLearn (Sep 2021)</span>
+                    </div>
+                    <div class="cert-item">
+                        <strong>Emerging Respiratory Viruses (COVID-19)</strong>
+                        <span class="cert-meta">World Health Organization (Apr 2020)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="activities" class="side-by-side-section fade-in">
+            <h2 class="section-title text-center">Involvement</h2>
+            <h2 class="section-subtitle text-center">Co-Curricular Activities & Volunteer Work</h2>
+
+            <div class="side-by-side-grid">
+                <div class="column-card card-hover">
+                    <h3><i class="fas fa-trophy"></i> Co-Curricular Activities</h3>
+                    <div class="activity-item">
+                        <h4>Executive, Creative & IT Panel — Dhaka College Cultural Club</h4>
+                        <p class="meta">Dhaka, Bangladesh | 2022–2023</p>
+                        <ul>
+                            <li>Planned and coordinated monthly cultural events to boost member engagement.</li>
+                            <li>Led the successful execution of the college’s intrafest twice.</li>
+                            <li>Managed the club’s website and maintained its digital presence on platforms like Facebook.</li>
+                        </ul>
+                    </div>
+                    <div class="activity-item">
+                        <h4>Club President & Impromptu Speaker — The Buds Residential Model School Debating Club</h4>
+                        <p class="meta">Sreemangal, Bangladesh | 2019–2020</p>
+                        <ul>
+                            <li>Led the debate team in regional and state‑level competitions.</li>
+                            <li>Conducted workshops for juniors on topic analysis, critical thinking and persuasive argumentation.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="volunteer" class="column-card card-hover">
+                    <h3><i class="fas fa-hands-helping"></i> Volunteer Experience</h3>
+                    <div class="activity-item">
+                        <h4>District Coordinator, Roar for Street Children</h4>
+                        <p class="meta">2020 – 2022 | Moulvibazar, Bangladesh</p>
+                        <p>Worked for the welfare of street children; organized mobile schooling and raised funds for sanitation and meals during the pandemic.</p>
+                    </div>
+                    <div class="activity-item">
+                        <h4>Member, Nirsartho Procesta</h4>
+                        <p class="meta">2024 – Present | Sreemangal, Bangladesh</p>
+                        <p>Engages in blood donation awareness (stage acting, social media) and coordinates relief efforts (rescuing people, providing dry food/water) for flood‑affected regions in Sylhet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="side-by-side-section fade-in">
+            <h2 class="section-title text-center">Expertise</h2>
+            <h2 class="section-subtitle text-center">My Skills & Achievements</h2>
+
+            <div class="side-by-side-grid">
+                <div class="column-card card-hover">
+                    <h3><i class="fas fa-code"></i> Technical & Soft Skills</h3>
+                    <div class="skill-group-aligned">
+                        <h4>Programming & Technical</h4>
+                        <div class="skills-list">
+                            <span>C++</span>
+                            <span>C</span>
+                            <span>HTML & CSS</span>
+                            <span>WordPress</span>
+                            <span>Data Structures & Algorithms</span>
+                        </div>
+                    </div>
+                    <div class="skill-group-aligned">
+                        <h4>Tools & Languages</h4>
+                        <div class="skills-list">
+                            <span>Google Workspace</span>
+                            <span>Microsoft Office Suite</span>
+                            <span>Bengali (Native)</span>
+                            <span>English (Professional)</span>
+                            <span>PTE (CEFR B2)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="awards" class="column-card card-hover">
+                    <h3><i class="fas fa-award"></i> Awards & Achievements</h3>
+                    <div class="award-item">
+                        <h4>Academic Excellence</h4>
+                        <ul>
+                            <li>Talent Pool Scholarship – Awarded for exceptional academic excellence (SSC examination 2022).</li>
+                            <li>Excellence Award – Honoured by Al‑Amin Academy for outstanding academic performance (2024).</li>
+                            <li>First Prize – Winner of the Inter‑Schools Brain Hunting Competition (2019).</li>
+                        </ul>
+                    </div>
+                    <div class="award-item">
+                        <h4>Co-curricular & Social Recognition</h4>
+                        <ul>
+                            <li>Champion – Achieved first place in the state‑level debating competition (2019).</li>
+                            <li>Leading Debater & Best Impromptu Speaker – Dual recognition at state‑level debate (2019).</li>
+                            <li>Best District Coordinator – Roar for Street Children initiative (2022).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects-section fade-in">
+            <h2 class="section-title text-center">Coding Portfolio</h2>
+            <h2 class="section-subtitle text-center">Some of My Projects That You Might Like!</h2>
+
+            <div class="projects-grid two-cols">
+                <div class="project-card card-hover">
+                    <div class="project-content">
+                        <h3>Arduino Ultrasonic Radar System</h3>
+                        <p class="project-tech-stack">Technologies: Arduino, Processing IDE</p>
+                        <ul>
+                            <li>Designed and coded a 180° radar with ultrasonic sensing, LED/buzzer alerts, and real-time GUI display.</li>
+                            <li>Co-authored IEEE-format report and contributed to circuit design and hardware integration.</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Soumik-Dastidar/Arduino-Radar-EEE-2122" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                        <span class="tech-tag">C/C++ & Hardware</span>
+                    </div>
+                </div>
+
+                <div class="project-card card-hover">
+                    <div class="project-content">
+                        <h3>Bank Management System: Pubali Bank Limited</h3>
+                        <p class="project-tech-stack">Technologies: C</p>
+                        <ul>
+                            <li>First-year project built entirely in C programming language using only File I/O — no external database or library is used.</li>
+                            <li>Simulates core banking operations: account creation, deposit, withdrawal, and balance inquiry.</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Soumik-Dastidar/Bank-Management-System" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                        <span class="tech-tag">C</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="blog-section fade-in">
+            <h2 class="section-title text-center">Thoughts & Insights</h2>
+            <h2 class="section-subtitle text-center">My Hashnode Blog</h2>
+            <div class="blog-grid">
+                <article class="blog-card card-hover">
+                    <div class="blog-content">
+                        <h3>From Learning to Sharing: Why I Started a Coding Blog</h3>
+                        <a href="https://dastidar.hashnode.dev/why-i-started-my-programming-blog-tailored-for-a-beginner-developer-like-you-whos-sharing-their-journey" target="_blank" class="read-article-link">» Read Article</a>
+                    </div>
+                </article>
+                <article class="blog-card card-hover">
+                    <div class="blog-content">
+                        <h3>The Power of Patterns: Building the Mindset for Future Problem Solving</h3>
+                        <a href="https://dastidar.hashnode.dev/the-power-of-patterns-building-the-mindset-for-future-problem-solving" target="_blank" class="read-article-link">» Read Article</a>
+                    </div>
+                </article>
+                <article class="blog-card card-hover">
+                    <div class="blog-content">
+                        <h3>C++ Math Basics & Boolean Logic</h3>
+                        <a href="https://dastidar.hashnode.dev/c-math-and-booleans" target="_blank" class="read-article-link">» Read Article</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="feedback" class="contact-section fade-in">
+            <h2 class="section-subtitle text-center">Your Feedback</h2>
+            <p class="contact-slogan text-center">Your feedback helps me improve. Please feel free to share your thoughts and suggestions.</p>
+            <div class="contact-card">
+                <a href="https://forms.gle/AZMKRvRff3FBCDAQ8" target="_blank" class="btn btn-primary">
+                    Submit Feedback <i class="fas fa-comment-dots"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section fade-in">
+            <h2 class="section-subtitle text-center">Get in Touch</h2>
+            <p class="contact-slogan text-center">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
+            <div class="contact-card card-hover">
+                <h2>Contact Information</h2>
+                <div class="contact-details-grid">
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span class="label">Email</span>
+                        <a href="mailto:soumikdastider@gmail.com">soumikdastider@gmail.com</a>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="label">Location</span>
+                        <span>Sreemangal, Sylhet, Bangladesh</span>
+                    </div>
+                    <div class="info-item socials-row">
+                        <i class="fas fa-share-alt"></i>
+                        <span class="label">Socials</span>
+                        <div class="social-icons-compact">
+                            <a href="https://github.com/Soumik-Dastidar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/soumik-dastidar/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.facebook.com/SoumikSoumya/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="https://hashnode.com/@soumik-dastidar" target="_blank" aria-label="Hashnode Blog"><i class="fas fa-blog"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://drive.google.com/drive/folders/1cVTJ41VuFvVMdbRw2PoRYHycbFrrLZ7c?usp=sharing" class="btn btn-secondary" target="_blank">
+                    Download Resume <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Soumik Dastidar. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth fade-in animation logic
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.fade-in').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Navigation Active State Update on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.navbar nav ul li a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const scrollOffset = 150; 
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - scrollOffset) { 
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
